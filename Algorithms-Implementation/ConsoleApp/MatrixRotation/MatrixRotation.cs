@@ -14,17 +14,14 @@ namespace MatrixRotation
             int col = matrix[0].Count;
             int m = row;
             int n = col;
-            int te = (row * col); // total number of elements
+            int te = (row * col); 
             Console.WriteLine($"r x c: {row} {col}");
 
-            // number of rectangles
             int numRect = row > col ? col / 2 : row / 2;
-
             int[] arrT = new int[te];
-
             int arStart = 0;
 
-            te = (row * 2) + (col * 2) - 4; // 4 numbers are shared between rows and columns, total elements in a rectangle
+            te = (row * 2) + (col * 2) - 4; 
 
             for (int i = 1; i <= numRect; i++)
             {
@@ -38,67 +35,39 @@ namespace MatrixRotation
 
                 int traversingpointer = 1;
 
-                // traverse vertically
                 for (int y = startRow; y <= row; y++)
                 {
-                    // PrintWithSpace(matrix.ElementAt(y - 1).ElementAt(startCol - 1));                    
-                    //if(i == 1)
-                    //{
                     int np = getnp(traversingpointer, rotation, te);
                     arrT[arStart + np - 1] = matrix.ElementAt(y - 1).ElementAt(startCol - 1);
-                    traversingpointer++;
-                    //}
-                }
-
-                // traverse horizontally
+                    traversingpointer++;                
+                }                
                 for (int x = startCol + 1; x <= col; x++)
                 {
-                    // PrintWithSpace(matrix.ElementAt(row - 1).ElementAt(x - 1));
-                    //if (i == 1)
-                    //{                        
                     arrT[arStart + getnp(traversingpointer, rotation, te) - 1] = matrix.ElementAt(row - 1).ElementAt(x - 1);
                     traversingpointer++;
-                    //}
                 }
-
-                // traverse vertically
                 for (int y = row - 1; y >= startRow; y--)
                 {
-                    // PrintWithSpace(matrix.ElementAt(y - 1).ElementAt(col - 1));
-                    //if (i == 1)
-                    //{
                     int np = getnp(traversingpointer, rotation, te);
                     arrT[arStart + np - 1] = matrix.ElementAt(y - 1).ElementAt(col - 1);
                     traversingpointer++;
-                    //}
                 }
-
-                // traverse horizontally
                 for (int x = col - 1; x > startCol; x--)
                 {
-                    //PrintWithSpace(matrix.ElementAt(startRow - 1).ElementAt(x - 1));
-                    //if (i == 1)
-                    //{                        
                     arrT[arStart + getnp(traversingpointer, rotation, te) - 1] = matrix.ElementAt(startRow - 1).ElementAt(x - 1);
                     traversingpointer++;
-                    //}
                 }
-
                 row = row - 1;
                 col = col - 1;
                 arStart = te;
             }
 
-            CreateMatrix(arrT, m, n, numRect);
-            Console.ReadKey();
+            CreateMatrix(arrT, m, n, numRect);            
         }
 
-        // return new position based on current position, rotation, total elements 
         public static int getnp(int c, int r, int tn)
-        {
-            //effective number of rotations
+        {            
             if (r > tn) r %= tn;
-
             if (r == 0) return c;
             else
             {
@@ -120,7 +89,6 @@ namespace MatrixRotation
                 int sCol = j;
                 int sRow = j;
 
-                // traverse vertically
                 for (int i = sRow; i <= r; i++)
                 {
                     if (j == 1)
@@ -130,22 +98,16 @@ namespace MatrixRotation
                     arrTranspose[i - 1][sCol - 1] = ar[traversingPointer - 1];
                     traversingPointer++;
                 }
-
-                // traverse horizontally
                 for (int i = sCol + 1; i <= c; i++)
                 {
                     arrTranspose[r - 1][i - 1] = ar[traversingPointer - 1];
                     traversingPointer++;
                 }
-
-                // traverse vertically
                 for (int i = r - 1; i >= sRow; i--)
                 {
                     arrTranspose[i - 1][c - 1] = ar[traversingPointer - 1];
                     traversingPointer++;
                 }
-
-                // traverse horizontally
                 for (int i = c - 1; i > sCol; i--)
                 {
                     arrTranspose[sRow - 1][i - 1] = ar[traversingPointer - 1];
@@ -157,8 +119,7 @@ namespace MatrixRotation
                 j++;
             }
 
-            PrintMatrix(arrTranspose);
-            Console.WriteLine("Done");
+            PrintMatrix(arrTranspose);            
         }
 
         public static void initMatrix() 
@@ -166,9 +127,7 @@ namespace MatrixRotation
             string[] mnr = Console.ReadLine().TrimEnd().Split(' ');
 
             int m = Convert.ToInt32(mnr[0]);
-
             int n = Convert.ToInt32(mnr[1]);
-
             r = Convert.ToInt32(mnr[2]);            
 
             for (int i = 0; i < m; i++)
