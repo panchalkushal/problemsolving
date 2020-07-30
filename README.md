@@ -1,6 +1,4 @@
 # Problem Solving
-========
-
 A list of solutions in C# for problems posted online.
 
 ## Table of Contents
@@ -9,4 +7,4 @@ A list of solutions in C# for problems posted online.
 
 Matrix Rotation
 ---------
-Rotate the matrix {n} number of times. Problem statement is [here] (https://www.hackerrank.com/challenges/matrix-rotation-algo/problem)
+Rotate the matrix {n} number of times. Problem statement is [here](https://www.hackerrank.com/challenges/matrix-rotation-algo/problem)
